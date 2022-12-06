@@ -7,18 +7,19 @@ const stackRows = stacks.split("\n");
 for (let i = stackRows.length - 2; i >= 0; i--) {
   console.log(stackRows[i]);
   for (let j = 0; j < stackRows[i].length; j++) {
-    if (formattedStacks[Math.floor(j / 4)] === undefined) {
-      formattedStacks[j / 4] = [];
+    const stackIndex = Math.floor(j / 4);
+    if (formattedStacks[stackIndex] === undefined) {
+      formattedStacks[stackIndex] = [];
     }
     if (j === 1 && stackRows[i][j] !== " ") {
-      formattedStacks[Math.floor(j / 4)].push(stackRows[i][j]);
+      formattedStacks[stackIndex].push(stackRows[i][j]);
     } else if ((j - 1) % 4 === 0 && stackRows[i][j] !== " ") {
-      formattedStacks[Math.floor(j / 4)].push(stackRows[i][j]);
+      formattedStacks[stackIndex].push(stackRows[i][j]);
     }
   }
 }
 
-moves.split("\n").forEach((move, index) => {
+moves.split("\n").forEach((move) => {
   let formattedMove = "";
   formattedMove = move.replace(/move |from |to /g, "");
   const [amountToMove, from, to] = formattedMove.split(" ");
